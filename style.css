@@ -3,12 +3,14 @@
     border: 1px solid red;
 }
 
+html {
+    font-size: large;
+}
+
 body {
     display: flex;
     flex-direction: column;
-    justify-self: center;
     align-items: center;
-    align-content: center;
 }
 
 header {
@@ -20,6 +22,12 @@ header {
 .timer {
     float: right;
     margin: 1%;
+}
+
+.startPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .answerGroup button {

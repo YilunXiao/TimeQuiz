@@ -11,22 +11,39 @@
 
     <header>
         <div class="timer">Timer</div>
-        <h1>Online Quiz</h1>
+        <h1>HTML Coding Quiz</h1>
     </header>
 
+    <section class="startPage">
+        <div>
+            Welcome to the HTML Coding Quiz. Answer questions as quickly as 
+            possible. Incorrect answers will reduce remaining time left. Your 
+            remaining time determines your final score!
+        </div>
+        <button>Start</button>
+    </section>
+
     <main class="quizContainer">
-        <div>Question</div>
+        <h2 class="question">Question</h2>
         <div class="answerGroup">Choices
             <button type="button">1. Click Me!</button>
             <button type="button">2. Click Me!!!!!!!!!!!!</button>
             <button type="button">3. Click Me!</button>
             <button type="button">4. Click Me!</button>
         </div>
+        <div class="displayMsg">
+            Your answer is [wrong/right]
+        </div>
     </main>
 
-    <div class="scoreBoard">
+    <ol class="scoreBoard">
         Highscores:
-    </div>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
     
 </body>
 </html>
