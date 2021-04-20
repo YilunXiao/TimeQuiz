@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+    border: 1px solid red;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    align-content: center;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.timer {
+    float: right;
+    margin: 1%;
+}
+
+.answerGroup button {
+    display: block;
+    margin: 5px;
+    border-radius: 5px;
+}
