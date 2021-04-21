@@ -10,31 +10,38 @@
 <body>
 
     <header>
-        <div class="timer">Timer</div>
+        <div id="timer">Time left:</div>
         <h1>HTML Coding Quiz</h1>
     </header>
 
-    <section class="startPage">
+    <section id="startPage">
         <div>
             Welcome to the HTML Coding Quiz. Answer questions as quickly as 
             possible. Incorrect answers will reduce remaining time left. Your 
             remaining time determines your final score!
         </div>
-        <button>Start</button>
+        <button type="button" id="startButton">Start</button>
     </section>
 
-    <main class="quizContainer">
-        <h2 class="question">Question</h2>
-        <div class="answerGroup">Choices
-            <button type="button">1. Click Me!</button>
-            <button type="button">2. Click Me!!!!!!!!!!!!</button>
-            <button type="button">3. Click Me!</button>
-            <button type="button">4. Click Me!</button>
+    <main id="quizContainer">
+        <h2 id="question">Question</h2>
+        <div id="answerGroup">
+            <button type="button" data-index="0">1. Click Me!</button>
+            <button type="button" data-index="1">2. Click Me!!!!!!!!!!!!</button>
+            <button type="button" data-index="2">3. Click Me!</button>
+            <button type="button" data-index="3">4. Click Me!</button>
         </div>
-        <div class="displayMsg">
+        <div id="displayMsg">
             Your answer is [wrong/right]
         </div>
     </main>
+
+    <form id="userInitials">
+        <h2>Congratulations, you scored <span id="userScore">100</span>!</h2>
+        <label for="initials">Initials:</label><br>
+        <input type="text" id="initials" name="initials" value="YX"><br>
+        <input type="submit" value="Submit">
+    </form>
 
     <ol class="scoreBoard">
         Highscores:
@@ -45,5 +52,6 @@
         <li></li>
     </ol>
     
+    <script src="script.js"></script>
 </body>
 </html>
