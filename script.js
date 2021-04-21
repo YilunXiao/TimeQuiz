@@ -6,6 +6,7 @@ var quiz = document.getElementById("quizContainer");
 var initials = document.getElementById("userInitials");
 var submit = document.getElementById("submit");
 var scoreBoard = document.getElementById("scoreBoard");
+var scoreList = document.getElementById("scoreList");
 var userScore = document.getElementById("userScore");
 var startBtn = document.getElementById("startButton");
 var ansGroup = document.getElementById("answerGroup");
@@ -17,8 +18,9 @@ var playAgain = document.getElementById("playAgain");
 var time;
 var answerIndex;
 var questionIndex = 0;
+var userName;
 var score;
-var scoreRanking = [];
+var scoreRanking;
 var qObjectList = [
     { 
         question: "What does HTML stands for?", 
@@ -70,6 +72,7 @@ function init() {
 
 // Starts the quiz and timer
 function startQuiz() {
+    questionIndex = 0;
     hideElement(title);
     hideElement(welcome);
     returnElement(quiz);
@@ -104,19 +107,40 @@ function showScore() {
 }
 
 // Updates and shows scoreboard
-function showScoreboard(newScore) {
-    
+function showScoreboard(newName) {
+    var newUser = {name: newName, score: score}
+    // Get local scores
+    scoreRanking = JSON.parse(localStorage.getItem("scores"));
+    // Compare scores
+    if (!scoreRanking) {
+        scoreRanking = [newUser]
+    } else {
+        compareScore(scoreRanking, newUser)
+    }
+    // Update scores
+    console.log(scoreRanking);
+    updateScoreboard(scoreRanking);
+    // Update local data
+    localStorage.setItem("scores", JSON.stringify(scoreRanking));
+
     removeElement(initials);
     returnElement(scoreBoard);
 }
+//Update scoreboard on page
+function updateScoreboard(newList) {
+    for (i = 0; i < newList.length; i++) {
+        scoreList.children[i].textContent = newList[i].name + " " + newList[i].score;
+    }
+}
+
 
 // Compares the new score to the current scoreboard
 function compareScore(scoreList, newScore) {
     for (i = 0; i < 5; i++) {
         if (!scoreList[i]) {
-            scoreList[i] = newScore
+            scoreList[i] = newScore;
             return;
-        } else if (scoreList[i] < newScore) {
+        } else if (scoreList[i].score < newScore.score) {
             scoreList.splice(i, 0, newScore);
             if (scoreList.length > 5) {
                 scoreList.pop();
@@ -150,7 +174,7 @@ function randomizeArray(array) {
 
 // Timer which runs for 5 seconds
 function runTimer() {
-    time = 5;
+    time = 100;
     timer.innerText = "Time left: " + time;
     returnElement(timer);
     var timeInterval = setInterval(function() {
@@ -191,8 +215,8 @@ startBtn.addEventListener("click", startQuiz);
 ansGroup.addEventListener("click", checkAnswer);
 submit.addEventListener("click", function (event) {
     event.preventDefault();
-    console.log(initials.elements[0].value);
-    showScoreboard();
+    // console.log(initials.elements[0].value);
+    showScoreboard(initials.elements[0].value);
 });
 playAgain.addEventListener("click", init);
 

@@ -30,6 +30,11 @@ header {
     align-items: center;
 }
 
+#startPage div {
+    margin: 1%;
+    width: 70%;
+}
+
 #answerGroup button {
     display: block;
     margin: 5px;
