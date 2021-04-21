@@ -1,5 +1,7 @@
 // DEPENDENCIES
 var timer = document.getElementById("timer");
+var title = document.getElementById("pageTitle");
+var welcome = document.getElementById("startPage");
 var userScore = document.getElementById("userScore");
 var startBtn = document.getElementById("startButton");
 var ansGroup = document.getElementById("answerGroup");
@@ -53,6 +55,8 @@ var qObjectList = [
 // FUNCTIONS
 // Starts the quiz and timer
 function startQuiz() {
+    hideElement(title);
+    hideElement(welcome);
     answerIndex = popQuestion(qObjectList[questionIndex]);
     runTimer();
 }
@@ -101,6 +105,8 @@ function randomizeArray(array) {
 // Timer which runs for 5 seconds
 function runTimer() {
     time = 100;
+    timer.innerText = "Time left: " + time;
+    returnElement(timer);
     var timeInterval = setInterval(function() {
         // Update and display remaining time
         time--;
@@ -111,6 +117,20 @@ function runTimer() {
             clearInterval(timeInterval);
         }
     },1000);
+}
+
+// Hide or remove element from page
+function hideElement(element) {
+    element.setAttribute("style", "visibility: hidden")
+}
+function showElement(element) {
+    element.setAttribute("style", "visibility: visible")
+}
+function removeElement(element) {
+    element.setAttribute("style", "display: none")
+}
+function returnElement(element) {
+    element.setAttribute("style", "display: block")
 }
 
 
