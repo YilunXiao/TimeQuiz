@@ -37,20 +37,24 @@
     </main>
 
     <form id="userInitials">
-        <h2>Congratulations, you scored <span id="userScore">100</span>!</h2>
+        <h2>Congratulations, you scored <span id="userScore">0</span>!</h2>
         <label for="initials">Initials:</label><br>
-        <input type="text" id="initials" name="initials" value="YX"><br>
-        <input type="submit" value="Submit">
+        <input type="text" id="initials" name="initials" value="AB"><br>
+        <!-- <input type="submit" value="Submit"> -->
+        <button id="submit">Submit</button>
     </form>
 
-    <ol id="scoreBoard">
-        Highscores:
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ol>
+    <div id="scoreBoard">
+        <ol>
+            Highscores:
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+        <button id="playAgain">Play Again</button>
+    </div>
     
     <script src="script.js"></script>
 </body>

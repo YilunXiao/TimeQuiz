@@ -2,10 +2,15 @@
 var timer = document.getElementById("timer");
 var title = document.getElementById("pageTitle");
 var welcome = document.getElementById("startPage");
+var quiz = document.getElementById("quizContainer");
+var initials = document.getElementById("userInitials");
+var submit = document.getElementById("submit");
+var scoreBoard = document.getElementById("scoreBoard");
 var userScore = document.getElementById("userScore");
 var startBtn = document.getElementById("startButton");
 var ansGroup = document.getElementById("answerGroup");
 var question = document.getElementById("question");
+var playAgain = document.getElementById("playAgain");
 
 
 // VARIABLES
@@ -13,6 +18,7 @@ var time;
 var answerIndex;
 var questionIndex = 0;
 var score;
+var scoreRanking = [];
 var qObjectList = [
     { 
         question: "What does HTML stands for?", 
@@ -53,10 +59,20 @@ var qObjectList = [
 
 
 // FUNCTIONS
+function init() {
+    removeElement(timer);
+    removeElement(quiz);
+    removeElement(initials);
+    removeElement(scoreBoard);
+    showElement(title);
+    showElement(welcome)
+}
+
 // Starts the quiz and timer
 function startQuiz() {
     hideElement(title);
     hideElement(welcome);
+    returnElement(quiz);
     answerIndex = popQuestion(qObjectList[questionIndex]);
     runTimer();
 }
@@ -74,9 +90,39 @@ function checkAnswer(event) {
             // End game
             score = time;
             userScore.textContent = score;
+            showScore();
         }
     } else if (buttonIndex) {
         time = time - 10;
+    }
+}
+
+function showScore() {
+    hideElement(timer);
+    removeElement(quiz);
+    returnElement(initials);
+}
+
+// Updates and shows scoreboard
+function showScoreboard(newScore) {
+    
+    removeElement(initials);
+    returnElement(scoreBoard);
+}
+
+// Compares the new score to the current scoreboard
+function compareScore(scoreList, newScore) {
+    for (i = 0; i < 5; i++) {
+        if (!scoreList[i]) {
+            scoreList[i] = newScore
+            return;
+        } else if (scoreList[i] < newScore) {
+            scoreList.splice(i, 0, newScore);
+            if (scoreList.length > 5) {
+                scoreList.pop();
+            }
+            return;
+        }
     }
 }
 
@@ -104,17 +150,19 @@ function randomizeArray(array) {
 
 // Timer which runs for 5 seconds
 function runTimer() {
-    time = 100;
+    time = 5;
     timer.innerText = "Time left: " + time;
     returnElement(timer);
     var timeInterval = setInterval(function() {
         // Update and display remaining time
         time--;
         timer.innerText = "Time left: " + time;
-        console.log(time);
+        // console.log(time);
         // Exit if time hits 0
         if (time <= 0) {
             clearInterval(timeInterval);
+            score = time;
+            showScore();
         }
     },1000);
 }
@@ -141,5 +189,12 @@ function returnElement(element) {
 // EVENT LISTENERS
 startBtn.addEventListener("click", startQuiz);
 ansGroup.addEventListener("click", checkAnswer);
+submit.addEventListener("click", function (event) {
+    event.preventDefault();
+    console.log(initials.elements[0].value);
+    showScoreboard();
+});
+playAgain.addEventListener("click", init);
 
 // INITIALIZATION
+init();
